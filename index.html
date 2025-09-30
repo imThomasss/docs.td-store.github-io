@@ -28,9 +28,9 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            border-bottom: 1px solid #333333;
-            padding: 20px 0;
+            background: #0a0a0a;
+            border-bottom: 1px solid #1a1a1a;
+            padding: 24px 0;
             margin-bottom: 0;
             position: relative;
             z-index: 10;
@@ -45,11 +45,11 @@
         
         .header h1 {
             color: #ffffff;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
             border: none;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
         
         .badges {
@@ -58,39 +58,39 @@
         
         .badge {
             display: inline-block;
-            padding: 6px 14px;
-            margin: 4px;
+            padding: 4px 12px;
+            margin: 2px;
             background: #1a1a1a;
-            color: #ffffff;
+            color: #888888;
             text-decoration: none;
-            border-radius: 20px;
-            font-size: 12px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 500;
-            border: 1px solid #333333;
+            border: 1px solid #2a2a2a;
             transition: all 0.2s ease;
         }
         
         .badge:hover {
             background: #2a2a2a;
-            border-color: #444444;
+            color: #cccccc;
         }
         
         .badge.blue { 
-            background: linear-gradient(135deg, #0066ff 0%, #0044cc 100%); 
-            color: #ffffff;
-            border-color: #0066ff;
+            background: #1a1a1a; 
+            color: #0066ff;
+            border-color: #333333;
         }
         
         .badge.green { 
-            background: linear-gradient(135deg, #00cc66 0%, #009944 100%); 
-            color: #ffffff;
-            border-color: #00cc66;
+            background: #1a1a1a; 
+            color: #00cc66;
+            border-color: #333333;
         }
         
         .badge.gold { 
-            background: linear-gradient(135deg, #ffaa00 0%, #cc8800 100%); 
-            color: #000000;
-            border-color: #ffaa00;
+            background: #1a1a1a; 
+            color: #ffaa00;
+            border-color: #333333;
         }
         
         .main-content {
@@ -360,15 +360,6 @@
             border-bottom: none;
         }
         
-        .content-section.active {
-            background: rgba(0, 102, 255, 0.03);
-            border-radius: 12px;
-            padding: 32px;
-            margin: -32px -32px 80px -32px;
-            border: 1px solid rgba(0, 102, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 102, 255, 0.1);
-        }
-        
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .sidebar {
@@ -442,9 +433,6 @@
                 <h3 class="nav-section-title">API Reference</h3>
                 <a href="#" class="nav-item" onclick="showSection('commands')">
                     <span class="emoji">📚</span> Commands
-                </a>
-                <a href="#" class="nav-item" onclick="showSection('events')">
-                    <span class="emoji">⚡</span> Events
                 </a>
                 <a href="#" class="nav-item" onclick="showSection('database')">
                     <span class="emoji">🗄️</span> Database
@@ -850,66 +838,6 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                     </table>
                 </div>
 
-                <!-- Events Section -->
-                <div id="events" class="content-section">
-                    <h2><span class="emoji">⚡</span> Events</h2>
-                    
-                    <h3>Client Events</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Event</th>
-                                <th>Description</th>
-                                <th>Parameters</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>td-store:openStore</code></td>
-                                <td>Opens the store interface</td>
-                                <td>None</td>
-                            </tr>
-                            <tr>
-                                <td><code>td-store:closeStore</code></td>
-                                <td>Closes the store interface</td>
-                                <td>None</td>
-                            </tr>
-                            <tr>
-                                <td><code>td-store:customNotify</code></td>
-                                <td>Custom notification event</td>
-                                <td>message, type</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>Server Events</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Event</th>
-                                <th>Description</th>
-                                <th>Parameters</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>td-store:purchaseItem</code></td>
-                                <td>Handles item purchases</td>
-                                <td>playerId, itemId, amount</td>
-                            </tr>
-                            <tr>
-                                <td><code>td-store:spawnVehicle</code></td>
-                                <td>Handles vehicle spawning</td>
-                                <td>playerId, vehicleModel</td>
-                            </tr>
-                            <tr>
-                                <td><code>td-store:webhook</code></td>
-                                <td>Handles Tebex webhook processing</td>
-                                <td>webhookData</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
 
                 <!-- Database Section -->
                 <div id="database" class="content-section">
@@ -1086,18 +1014,9 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
             // Prevent flashing during scroll
             isScrolling = true;
             
-            // Remove active class from all sections
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Add active class to selected section
+            // Smooth scroll to the section
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
-                targetSection.classList.add('active');
-                
-                // Smooth scroll to the section
                 targetSection.scrollIntoView({ 
                     behavior: 'smooth', 
                     block: 'start',
@@ -1162,14 +1081,6 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                         item.classList.add('active');
                     }
                 });
-                
-                // Update section highlighting
-                sections.forEach(section => {
-                    section.classList.remove('active');
-                    if (section.id === currentSection) {
-                        section.classList.add('active');
-                    }
-                });
             }
         }
         
@@ -1203,12 +1114,6 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
         
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Set initial active section
-            const firstSection = document.querySelector('.content-section');
-            if (firstSection) {
-                firstSection.classList.add('active');
-            }
-            
             // Set initial active nav item
             const firstNavItem = document.querySelector('.nav-item');
             if (firstNavItem) {
