@@ -700,7 +700,7 @@ add_ace group.manager tdstore.manager allow</code></pre>
     project_id = "YOUR_TEBEX_PROJECT_ID",
     webhook_secret = "YOUR_WEBHOOK_SECRET",
     webhook = {
-        url = "http://your-server-ip:30120/webhook"
+        url = "http://your-server-ip:30120/td-store/webhook"
     }
 }</code></pre>
 
@@ -712,7 +712,7 @@ add_ace group.manager tdstore.manager allow</code></pre>
                     </div>
                     
                     <div class="info-box warning">
-                        <p><strong>Step 2 - Configure Webhook URL:</strong> In your <code>s_config.lua</code>, set the webhook URL to: <code>http://YOUR_SERVER_IP:30120/webhook</code></p>
+                        <p><strong>Step 2 - Configure Webhook URL:</strong> In your <code>s_config.lua</code>, set the webhook URL to: <code>http://YOUR_SERVER_IP:30120/td-store/webhook</code></p>
                     </div>
                     
                     <div class="info-box warning">
@@ -720,7 +720,7 @@ add_ace group.manager tdstore.manager allow</code></pre>
                     </div>
                     
                     <div class="info-box warning">
-                        <p><strong>Step 4 - Validate Endpoint:</strong> Enter your webhook URL (<code>http://YOUR_SERVER_IP:30120/webhook</code>) in Tebex. Tebex will test the endpoint to ensure it's accessible.</p>
+                        <p><strong>Step 4 - Validate Endpoint:</strong> Enter your webhook URL (<code>http://YOUR_SERVER_IP:30120/td-store/webhook</code>) in Tebex. Tebex will test the endpoint to ensure it's accessible.</p>
                     </div>
                     
                     <div class="info-box warning">
@@ -731,11 +731,22 @@ add_ace group.manager tdstore.manager allow</code></pre>
                         <p><strong>Step 6 - Restart Script:</strong> Restart your FiveM server or reload the TD-Store script to apply the webhook secret configuration.</p>
                     </div>
                     
+                    <h5>Webhook Security Features</h5>
+                    <div class="info-box success">
+                        <p><strong>Built-in Security:</strong> TD-Store includes enterprise-grade webhook security:</p>
+                        <ul>
+                            <li><strong>HMAC SHA-256 Signature Validation</strong> - All webhooks are cryptographically validated using Tebex's double-hash method</li>
+                            <li><strong>Tebex IP Whitelist</strong> - Only requests from verified Tebex IP addresses are accepted</li>
+                            <li><strong>Production Ready</strong> - Full security implementation with proper error handling</li>
+                            <li><strong>No External Dependencies</strong> - Webhook server runs directly in FiveM, no separate Node.js server required</li>
+                        </ul>
+                    </div>
+                    
                     <p>Configure webhooks in your Tebex dashboard → <strong>Integrations</strong> → <strong>Webhooks</strong>:</p>
                     <img src="assets/tebex-webhook.png" alt="Tebex Webhook Configuration" style="max-width: 100%; border: 1px solid #30363d; border-radius: 6px; margin: 16px 0;">
                     
                     <div class="info-box warning">
-                        <p><strong>Critical:</strong> Your server must be running and accessible from the internet before Tebex can validate the webhook endpoint. The webhook URL format should be: <code>http://YOUR_SERVER_IP:30120/webhook</code></p>
+                        <p><strong>Critical:</strong> Your server must be running and accessible from the internet before Tebex can validate the webhook endpoint. The webhook URL format should be: <code>http://YOUR_SERVER_IP:30120/td-store/webhook</code></p>
                     </div>
 
                     <h4>Security Settings</h4>
@@ -1054,11 +1065,18 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                             <li><strong>Follow Setup Order:</strong> Ensure you followed the exact webhook setup sequence (server running → config URL → Tebex validation → copy secret → restart)</li>
                             <li><strong>Server Status:</strong> Verify your FiveM server is running and TD-Store script is started before configuring webhooks</li>
                             <li><strong>Port Access:</strong> Ensure server is running on port 30120 and accessible from internet</li>
-                            <li><strong>URL Format:</strong> Verify webhook URL format is exactly: <code>http://YOUR_SERVER_IP:30120/webhook</code></li>
+                            <li><strong>URL Format:</strong> Verify webhook URL format is exactly: <code>http://YOUR_SERVER_IP:30120/td-store/webhook</code></li>
                             <li><strong>Endpoint Validation:</strong> Tebex must successfully validate the endpoint before webhooks will work</li>
                             <li><strong>Secret Match:</strong> Check webhook secret in config matches the one from Tebex dashboard</li>
                             <li><strong>Restart Required:</strong> Restart server after adding webhook secret to configuration</li>
                             <li><strong>Firewall:</strong> Ensure port 30120 is open in your server firewall</li>
+                            <li><strong>Tebex IP Whitelist:</strong> If webhook validation is failing, ensure these Tebex IP addresses are whitelisted in your firewall/server configuration:
+                                <ul>
+                                    <li><code>18.209.80.3</code></li>
+                                    <li><code>54.87.231.232</code></li>
+                                </ul>
+                                These are the only IP addresses that Tebex webhooks will be sent from.
+                            </li>
                         </ul>
                     </div>
 
@@ -1157,7 +1175,7 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
         </div>
 
         <div class="footer">
-            <p><strong>TD-Store</strong> - Tebex Credit Integration + Vehicle Management</p>
+            <p><strong>TD-Store</strong> - Tebex Credit Integration + Vehicle Management + Secure Webhook Processing</p>
         </div>
     </div>
 
