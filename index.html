@@ -242,9 +242,184 @@
         .breadcrumb a:hover {
             text-decoration: underline;
         }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: #161b22;
+            border-right: 1px solid #30363d;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .sidebar-header h2 {
+            color: #f0f6fc;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+        
+        .nav-section {
+            margin-bottom: 8px;
+        }
+        
+        .nav-section-title {
+            color: #8b949e;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 20px;
+            margin: 0;
+        }
+        
+        .nav-item {
+            display: block;
+            color: #c9d1d9;
+            text-decoration: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: #21262d;
+            color: #f0f6fc;
+        }
+        
+        .nav-item.active {
+            background: #21262d;
+            color: #f0f6fc;
+            border-left-color: #58a6ff;
+        }
+        
+        .nav-item .emoji {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        /* Adjust main content for sidebar */
+        .main-content {
+            margin-left: 280px;
+            padding: 0 24px 40px;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1001;
+                background: #161b22;
+                border: 1px solid #30363d;
+                color: #c9d1d9;
+                padding: 8px 12px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div class="mobile-menu-btn" onclick="toggleSidebar()">☰ Menu</div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>TD-Store Docs</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3 class="nav-section-title">Getting Started</h3>
+                <a href="#" class="nav-item active" onclick="showSection('overview')">
+                    <span class="emoji">🎯</span> Overview
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('installation')">
+                    <span class="emoji">🚀</span> Installation
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('configuration')">
+                    <span class="emoji">⚙️</span> Configuration
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <h3 class="nav-section-title">Features</h3>
+                <a href="#" class="nav-item" onclick="showSection('store-system')">
+                    <span class="emoji">🛒</span> Store System
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('garage-management')">
+                    <span class="emoji">🏠</span> Garage Management
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('admin-tools')">
+                    <span class="emoji">👨‍💼</span> Admin Tools
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <h3 class="nav-section-title">API Reference</h3>
+                <a href="#" class="nav-item" onclick="showSection('commands')">
+                    <span class="emoji">📚</span> Commands
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('events')">
+                    <span class="emoji">⚡</span> Events
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('database')">
+                    <span class="emoji">🗄️</span> Database
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <h3 class="nav-section-title">Support</h3>
+                <a href="#" class="nav-item" onclick="showSection('troubleshooting')">
+                    <span class="emoji">🔧</span> Troubleshooting
+                </a>
+                <a href="#" class="nav-item" onclick="showSection('support')">
+                    <span class="emoji">📞</span> Support
+                </a>
+            </div>
+        </nav>
+    </div>
+
     <div class="container">
         <div class="header">
             <div class="header-content">
@@ -263,77 +438,107 @@
             </div>
             
             <div class="content">
-                <div class="info-box">
-                    <p><strong>TD-Store</strong> is a premium FiveM store system that provides a modern, feature-rich in-game store experience with Tebex integration, vehicle garage management, and a comprehensive credit system. Built with security and performance in mind, it offers both players and administrators powerful tools for managing virtual economies.</p>
+                <!-- Overview Section -->
+                <div id="overview" class="content-section active">
+                    <div class="info-box">
+                        <p><strong>TD-Store</strong> is a premium FiveM store system that provides a modern, feature-rich in-game store experience with Tebex integration, vehicle garage management, and a comprehensive credit system. Built with security and performance in mind, it offers both players and administrators powerful tools for managing virtual economies.</p>
+                    </div>
+
+                    <h2><span class="emoji">🚀</span> Key Highlights</h2>
+                    <ul>
+                        <li><strong>Modern Architecture</strong> - Built with Lua 5.4 and modern FiveM standards</li>
+                        <li><strong>Enterprise Security</strong> - Anti-cheat protection and ownership validation</li>
+                        <li><strong>Tebex Integration</strong> - Seamless payment processing and webhook handling</li>
+                        <li><strong>Beautiful UI</strong> - Responsive, modern interface with dark theme</li>
+                        <li><strong>Comprehensive Logging</strong> - Discord webhook integration for monitoring</li>
+                        <li><strong>High Performance</strong> - Optimized database queries and efficient resource usage</li>
+                    </ul>
+
+                    <h2><span class="emoji">✨</span> What Makes TD-Store Special</h2>
+                    <p>TD-Store stands out from other FiveM store systems with its comprehensive feature set and enterprise-grade security. Unlike basic store scripts, TD-Store provides:</p>
+                    
+                    <ul>
+                        <li><strong>Real-time Vehicle Previews</strong> - Players can see exactly what they're buying before purchase</li>
+                        <li><strong>Advanced Anti-Cheat</strong> - Multiple layers of protection against exploitation</li>
+                        <li><strong>Seamless Tebex Integration</strong> - Direct payment processing without external dependencies</li>
+                        <li><strong>Professional Admin Tools</strong> - Complete management interface for server administrators</li>
+                        <li><strong>Scalable Architecture</strong> - Handles large player bases with optimized performance</li>
+                    </ul>
                 </div>
 
-                <h2><span class="emoji">🚀</span> Key Highlights</h2>
-                <ul>
-                    <li><strong>Modern Architecture</strong> - Built with Lua 5.4 and modern FiveM standards</li>
-                    <li><strong>Enterprise Security</strong> - Anti-cheat protection and ownership validation</li>
-                    <li><strong>Tebex Integration</strong> - Seamless payment processing and webhook handling</li>
-                    <li><strong>Beautiful UI</strong> - Responsive, modern interface with dark theme</li>
-                    <li><strong>Comprehensive Logging</strong> - Discord webhook integration for monitoring</li>
-                    <li><strong>High Performance</strong> - Optimized database queries and efficient resource usage</li>
-                </ul>
+                <!-- Installation Section -->
+                <div id="installation" class="content-section">
+                    <h2><span class="emoji">🚀</span> Installation Guide</h2>
+                    
+                    <h3>Prerequisites</h3>
+                    <div class="info-box">
+                        <p>Before installing TD-Store, ensure you have the following:</p>
+                        <ul>
+                            <li><strong>FiveM Server</strong> - Running FiveM server with admin access</li>
+                            <li><strong>MySQL Database</strong> - MySQL 5.7+ or MariaDB 10.3+</li>
+                            <li><strong>oxmysql Resource</strong> - Latest version installed and configured</li>
+                            <li><strong>Tebex Account</strong> - Active Tebex account for payment processing</li>
+                            <li><strong>Discord Webhook</strong> - Optional but recommended for logging</li>
+                        </ul>
+                    </div>
 
-                <h2><span class="emoji">✨</span> Features</h2>
-                
-                <h3><span class="emoji">🛒</span> Store System</h3>
-                <ul>
-                    <li><strong>Vehicle Store</strong> - Browse, preview, and purchase vehicles with real-time previews</li>
-                    <li><strong>Credit Packages</strong> - Tebex-integrated credit purchasing system</li>
-                    <li><strong>Item Management</strong> - Add/edit store items through manager interface</li>
-                    <li><strong>Purchase History</strong> - Complete transaction logging and history</li>
-                </ul>
+                    <h3>Step 1: Download and Extract</h3>
+                    <ol>
+                        <li>Download TD-Store from your purchase source</li>
+                        <li>Extract the archive to your server's <code>resources</code> folder</li>
+                        <li>Ensure the folder structure is: <code>resources/td-store/</code></li>
+                    </ol>
 
-                <h3><span class="emoji">🏠</span> Garage Management</h3>
-                <ul>
-                    <li><strong>My Garage</strong> - Personal vehicle collection management</li>
-                    <li><strong>Vehicle Spawning</strong> - Spawn owned vehicles with protection systems</li>
-                    <li><strong>Ownership Validation</strong> - Secure vehicle access control</li>
-                    <li><strong>Spawn Protection</strong> - Temporary invincibility after spawning</li>
-                </ul>
+                    <h3>Step 2: Database Setup</h3>
+                    <ol>
+                        <li>Open your MySQL database management tool (phpMyAdmin, MySQL Workbench, etc.)</li>
+                        <li>Import the <code>database.sql</code> file into your database</li>
+                        <li>Verify the following tables were created:
+                            <ul>
+                                <li><code>td_store_players</code> - Player data and credit balances</li>
+                                <li><code>td_store_purchases</code> - Purchase history</li>
+                                <li><code>td_store_ownership</code> - Vehicle ownership records</li>
+                                <li><code>td_store_items</code> - Store items configuration</li>
+                            </ul>
+                        </li>
+                    </ol>
 
-                <h3><span class="emoji">👨‍💼</span> Administration Tools</h3>
-                <ul>
-                    <li><strong>Admin Panel</strong> - Player management and refund processing</li>
-                    <li><strong>Manager Tools</strong> - Store item and credit package management</li>
-                    <li><strong>Player Commands</strong> - Credit management and vehicle administration</li>
-                    <li><strong>Security Monitoring</strong> - Unauthorized access detection and logging</li>
-                </ul>
+                    <h3>Step 3: Resource Configuration</h3>
+                    <p>Add TD-Store to your <code>server.cfg</code> file:</p>
+                    <pre><code># Database (must load first)
+ensure oxmysql
 
-                <h2><span class="emoji">🚀</span> Quick Start</h2>
-                
-                <h3>Prerequisites</h3>
-                <ul>
-                    <li>FiveM Server</li>
-                    <li>MySQL Database</li>
-                    <li>oxmysql Resource</li>
-                    <li>Tebex Account (for payment processing)</li>
-                </ul>
-
-                <h3>Installation Steps</h3>
-                <ol>
-                    <li>Download TD-Store from your purchase source</li>
-                    <li>Extract files to your server's <code>resources</code> folder</li>
-                    <li>Import <code>database.sql</code> into your MySQL database</li>
-                    <li>Configure <code>s_config.lua</code> and <code>c_config.lua</code></li>
-                    <li>Add to your <code>server.cfg</code>:
-                        <pre><code>ensure oxmysql
+# TD-Store (loads after oxmysql)
 ensure td-store</code></pre>
-                    </li>
-                    <li>Set up ACE permissions:
-                        <pre><code>add_ace group.admin tdstore.admin allow
-add_ace group.manager tdstore.manager allow</code></pre>
-                    </li>
-                </ol>
 
-                <h2><span class="emoji">⚙️</span> Configuration</h2>
-                
-                <h3>Tebex Integration</h3>
-                <p>Configure your Tebex settings in <code>s_config.lua</code>:</p>
-                <pre><code>SConfig.Tebex = {
+                    <h3>Step 4: Permissions Setup</h3>
+                    <p>Add these ACE permissions to your <code>server.cfg</code>:</p>
+                    <pre><code># Admin permissions
+add_ace group.admin tdstore.admin allow
+
+# Manager permissions  
+add_ace group.manager tdstore.manager allow</code></pre>
+
+                    <div class="info-box warning">
+                        <p><strong>Important:</strong> Ensure oxmysql loads before TD-Store to prevent database connection errors.</p>
+                    </div>
+                </div>
+
+                <!-- Configuration Section -->
+                <div id="configuration" class="content-section">
+                    <h2><span class="emoji">⚙️</span> Configuration</h2>
+                    
+                    <h3>Server Configuration (s_config.lua)</h3>
+                    <p>The server configuration contains sensitive information and should be configured carefully:</p>
+                    
+                    <h4>Tebex Integration</h4>
+                    <p>Configure your Tebex settings for payment processing. You'll need to obtain these values from your Tebex dashboard:</p>
+                    
+                    <h5>Getting Your Tebex API Keys</h5>
+                    <p>Navigate to your Tebex dashboard → <strong>Integrations</strong> → <strong>API Keys</strong> to find your credentials:</p>
+                    <img src="assets/tebex-api.png" alt="Tebex API Keys Configuration" style="max-width: 100%; border: 1px solid #30363d; border-radius: 6px; margin: 16px 0;">
+                    
+                    <pre><code>SConfig.Tebex = {
     private_key = "YOUR_TEBEX_PRIVATE_KEY",
     public_token = "YOUR_TEBEX_PUBLIC_TOKEN", 
     project_id = "YOUR_TEBEX_PROJECT_ID",
@@ -343,62 +548,505 @@ add_ace group.manager tdstore.manager allow</code></pre>
     }
 }</code></pre>
 
-                <h2><span class="emoji">📚</span> Admin Commands</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Command</th>
-                            <th>Permission</th>
-                            <th>Description</th>
-                            <th>Usage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>/givestorecredits</code></td>
-                            <td><code>tdstore.admin</code></td>
-                            <td>Give credits to player</td>
-                            <td><code>/givestorecredits [id] [amount]</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>/removestorecredits</code></td>
-                            <td><code>tdstore.admin</code></td>
-                            <td>Remove credits from player</td>
-                            <td><code>/removestorecredits [id] [amount]</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>/resetstoreplayer</code></td>
-                            <td><code>tdstore.admin</code></td>
-                            <td>Reset player data</td>
-                            <td><code>/resetstoreplayer [id]</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>/viewstoreplayer</code></td>
-                            <td><code>tdstore.admin</code></td>
-                            <td>View player information</td>
-                            <td><code>/viewstoreplayer [id]</code></td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <h5>Setting Up Tebex Webhooks</h5>
+                    <p>Configure webhooks in your Tebex dashboard → <strong>Integrations</strong> → <strong>Webhooks</strong>:</p>
+                    <img src="assets/tebex-webhook.png" alt="Tebex Webhook Configuration" style="max-width: 100%; border: 1px solid #30363d; border-radius: 6px; margin: 16px 0;">
+                    
+                    <div class="info-box warning">
+                        <p><strong>Important:</strong> Make sure your server is running on port 30120 and accessible from the internet before setting up the webhook. The webhook URL should be: <code>http://YOUR_SERVER_IP:30120/webhook</code></p>
+                    </div>
 
-                <h2><span class="emoji">🔧</span> Troubleshooting</h2>
-                
-                <h3>Common Issues</h3>
-                <ul>
-                    <li><strong>Webhook Not Working</strong> - Ensure server runs on port 30120 and webhook URL is accessible</li>
-                    <li><strong>Database Connection Issues</strong> - Verify oxmysql loads before TD-Store</li>
-                    <li><strong>Permission Errors</strong> - Check ACE permissions and group assignments</li>
-                    <li><strong>Vehicle Spawning Issues</strong> - Verify spawn coordinates and vehicle model names</li>
-                </ul>
+                    <h4>Security Settings</h4>
+                    <pre><code>SConfig.Security = {
+    validateOwnershipOnEnter = true,
+    allowPassengers = true,
+    ejectUnauthorizedDrivers = true,
+    maxVehiclesPerPlayer = 10,
+    cooldownBetweenSpawns = 3,
+    enableAntiCheat = true,
+    logAllTransactions = true,
+    maxPurchasePerMinute = 10
+}</code></pre>
 
-                <h2><span class="emoji">📞</span> Support</h2>
-                <p>For support and updates, join our Discord: <a href="https://discord.gg/tWwfPnxz47">https://discord.gg/tWwfPnxz47</a></p>
+                    <h4>Discord Webhook</h4>
+                    <pre><code>SConfig.Discord = {
+    enabled = true,
+    webhookUrl = "YOUR_DISCORD_WEBHOOK_URL",
+    serverName = "Your Server Name",
+    logPurchases = true,
+    logCreditPurchases = true,
+    logUnauthorizedAccess = true
+}</code></pre>
+
+                    <h3>Client Configuration (c_config.lua)</h3>
+                    <p>The client configuration contains non-sensitive settings:</p>
+                    
+                    <h4>General Settings</h4>
+                    <pre><code>CConfig.Command = 'store'        -- Command to open store
+CConfig.Keybind = 'F7'           -- Keybind to open store
+CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
+
+                    <h4>Vehicle Preview Settings</h4>
+                    <pre><code>CConfig.VehiclePreview = {
+    dealershipCoords = vector3(-56.79, -1096.63, 25.42),
+    vehicleSpawnCoords = vector3(-50.0, -1100.0, 25.5),
+    cameraCoords = vector3(-45.0, -1095.0, 27.0),
+    cameraRotation = vector3(-10.0, 0.0, 45.0)
+}</code></pre>
+                </div>
+
+                <!-- Store System Section -->
+                <div id="store-system" class="content-section">
+                    <h2><span class="emoji">🛒</span> Store System</h2>
+                    
+                    <h3>Vehicle Store</h3>
+                    <p>The vehicle store allows players to browse, preview, and purchase vehicles with a modern interface:</p>
+                    <ul>
+                        <li><strong>Real-time Previews</strong> - Players are teleported to a showroom to preview vehicles</li>
+                        <li><strong>Detailed Information</strong> - Vehicle stats, price, and description displayed</li>
+                        <li><strong>Category Filtering</strong> - Filter vehicles by type, price, or manufacturer</li>
+                        <li><strong>Search Functionality</strong> - Quick search for specific vehicles</li>
+                    </ul>
+
+                    <h3>Credit Packages</h3>
+                    <p>Tebex-integrated credit purchasing system:</p>
+                    <ul>
+                        <li><strong>Automatic Sync</strong> - Credit packages sync automatically from Tebex</li>
+                        <li><strong>Real-time Processing</strong> - Instant credit delivery via webhooks</li>
+                        <li><strong>Secure Transactions</strong> - All payments processed securely through Tebex</li>
+                        <li><strong>Purchase History</strong> - Complete transaction logging</li>
+                    </ul>
+
+                    <h3>Item Management</h3>
+                    <p>Administrators can manage store items through the manager interface:</p>
+                    <ul>
+                        <li><strong>Add Vehicles</strong> - Add new vehicles to the store</li>
+                        <li><strong>Edit Prices</strong> - Modify vehicle prices and descriptions</li>
+                        <li><strong>Enable/Disable</strong> - Toggle item availability</li>
+                        <li><strong>Bulk Operations</strong> - Manage multiple items at once</li>
+                    </ul>
+                </div>
+
+                <!-- Garage Management Section -->
+                <div id="garage-management" class="content-section">
+                    <h2><span class="emoji">🏠</span> Garage Management</h2>
+                    
+                    <h3>My Garage</h3>
+                    <p>Personal vehicle collection management system:</p>
+                    <ul>
+                        <li><strong>Vehicle Collection</strong> - View all owned vehicles in one place</li>
+                        <li><strong>Quick Spawn</strong> - Spawn vehicles with a single click</li>
+                        <li><strong>Vehicle Information</strong> - View vehicle stats and purchase date</li>
+                        <li><strong>Organization</strong> - Sort vehicles by type, date, or name</li>
+                    </ul>
+
+                    <h3>Vehicle Spawning</h3>
+                    <p>Advanced vehicle spawning system with protection:</p>
+                    <ul>
+                        <li><strong>Spawn Protection</strong> - Temporary invincibility after spawning</li>
+                        <li><strong>Location Validation</strong> - Ensures safe spawn locations</li>
+                        <li><strong>Duplicate Prevention</strong> - Prevents spawning multiple vehicles</li>
+                        <li><strong>Auto-cleanup</strong> - Removes vehicles on disconnect</li>
+                    </ul>
+
+                    <h3>Ownership Validation</h3>
+                    <p>Secure vehicle access control system:</p>
+                    <ul>
+                        <li><strong>Driver Validation</strong> - Only owners can drive their vehicles</li>
+                        <li><strong>Passenger Control</strong> - Configurable passenger permissions</li>
+                        <li><strong>Unauthorized Access Detection</strong> - Logs and prevents unauthorized use</li>
+                        <li><strong>Automatic Ejection</strong> - Removes unauthorized drivers</li>
+                    </ul>
+                </div>
+
+                <!-- Admin Tools Section -->
+                <div id="admin-tools" class="content-section">
+                    <h2><span class="emoji">👨‍💼</span> Admin Tools</h2>
+                    
+                    <h3>Admin Panel</h3>
+                    <p>Comprehensive player management interface:</p>
+                    <ul>
+                        <li><strong>Player Management</strong> - View and manage player data</li>
+                        <li><strong>Credit Administration</strong> - Add/remove credits from players</li>
+                        <li><strong>Refund Processing</strong> - Process purchase refunds</li>
+                        <li><strong>Transaction History</strong> - View complete purchase history</li>
+                    </ul>
+
+                    <h3>Manager Tools</h3>
+                    <p>Store management interface for administrators:</p>
+                    <ul>
+                        <li><strong>Item Management</strong> - Add/edit store items</li>
+                        <li><strong>Credit Package Control</strong> - Enable/disable credit packages</li>
+                        <li><strong>Store Configuration</strong> - Modify store settings</li>
+                        <li><strong>Analytics Dashboard</strong> - View sales and usage statistics</li>
+                    </ul>
+
+                    <h3>Security Monitoring</h3>
+                    <p>Advanced security and monitoring features:</p>
+                    <ul>
+                        <li><strong>Unauthorized Access Logs</strong> - Track suspicious activity</li>
+                        <li><strong>Transaction Monitoring</strong> - Monitor all purchases</li>
+                        <li><strong>Anti-Cheat Detection</strong> - Detect and prevent exploitation</li>
+                        <li><strong>Discord Integration</strong> - Real-time notifications</li>
+                    </ul>
+                </div>
+
+                <!-- Commands Section -->
+                <div id="commands" class="content-section">
+                    <h2><span class="emoji">📚</span> Admin Commands</h2>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>Permission</th>
+                                <th>Description</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>/givestorecredits</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>Give credits to player</td>
+                                <td><code>/givestorecredits [id] [amount]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/removestorecredits</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>Remove credits from player</td>
+                                <td><code>/removestorecredits [id] [amount]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/resetstoreplayer</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>Reset player data</td>
+                                <td><code>/resetstoreplayer [id]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/viewstoreplayer</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>View player information</td>
+                                <td><code>/viewstoreplayer [id]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/givestorevehicle</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>Give vehicle to player</td>
+                                <td><code>/givestorevehicle [id] [vehicle_id]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/removestorevehicle</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>Remove vehicle from player</td>
+                                <td><code>/removestorevehicle [id] [vehicle_id]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/refundstorepurchase</code></td>
+                                <td><code>tdstore.admin</code></td>
+                                <td>Refund a purchase</td>
+                                <td><code>/refundstorepurchase [player_id] [purchase_id]</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Manager Commands</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Permission</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>tdstore.manager</code></td>
+                                <td>Access to store management interface for adding/editing items and credit packages</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Events Section -->
+                <div id="events" class="content-section">
+                    <h2><span class="emoji">⚡</span> Events</h2>
+                    
+                    <h3>Client Events</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Description</th>
+                                <th>Parameters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>td-store:openStore</code></td>
+                                <td>Opens the store interface</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td><code>td-store:closeStore</code></td>
+                                <td>Closes the store interface</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td><code>td-store:customNotify</code></td>
+                                <td>Custom notification event</td>
+                                <td>message, type</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Server Events</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Description</th>
+                                <th>Parameters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>td-store:purchaseItem</code></td>
+                                <td>Handles item purchases</td>
+                                <td>playerId, itemId, amount</td>
+                            </tr>
+                            <tr>
+                                <td><code>td-store:spawnVehicle</code></td>
+                                <td>Handles vehicle spawning</td>
+                                <td>playerId, vehicleModel</td>
+                            </tr>
+                            <tr>
+                                <td><code>td-store:webhook</code></td>
+                                <td>Handles Tebex webhook processing</td>
+                                <td>webhookData</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Database Section -->
+                <div id="database" class="content-section">
+                    <h2><span class="emoji">🗄️</span> Database Structure</h2>
+                    
+                    <h3>Tables Overview</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Table</th>
+                                <th>Description</th>
+                                <th>Key Fields</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>td_store_players</code></td>
+                                <td>Player credit balances and data</td>
+                                <td>player_id, credits, last_login</td>
+                            </tr>
+                            <tr>
+                                <td><code>td_store_purchases</code></td>
+                                <td>Purchase history and transactions</td>
+                                <td>purchase_id, player_id, item_id, amount, timestamp</td>
+                            </tr>
+                            <tr>
+                                <td><code>td_store_ownership</code></td>
+                                <td>Vehicle ownership records</td>
+                                <td>player_id, vehicle_model, purchase_date</td>
+                            </tr>
+                            <tr>
+                                <td><code>td_store_items</code></td>
+                                <td>Store items and configurations</td>
+                                <td>item_id, name, price, category, enabled</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Database Relationships</h3>
+                    <ul>
+                        <li><strong>Players → Purchases</strong> - One-to-many relationship</li>
+                        <li><strong>Players → Ownership</strong> - One-to-many relationship</li>
+                        <li><strong>Items → Purchases</strong> - One-to-many relationship</li>
+                    </ul>
+                </div>
+
+                <!-- Troubleshooting Section -->
+                <div id="troubleshooting" class="content-section">
+                    <h2><span class="emoji">🔧</span> Troubleshooting</h2>
+                    
+                    <h3>Common Issues</h3>
+                    
+                    <h4>Webhook Not Working</h4>
+                    <div class="info-box warning">
+                        <p><strong>Problem:</strong> Tebex webhooks not processing payments</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Ensure server is running on port 30120</li>
+                            <li>Verify webhook URL is accessible from internet</li>
+                            <li>Check webhook secret matches configuration</li>
+                            <li>Restart server after webhook setup</li>
+                        </ul>
+                    </div>
+
+                    <h4>Database Connection Issues</h4>
+                    <div class="info-box warning">
+                        <p><strong>Problem:</strong> Database errors or connection failures</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Verify oxmysql is loaded before TD-Store</li>
+                            <li>Check database credentials in oxmysql config</li>
+                            <li>Ensure database tables were created properly</li>
+                            <li>Check MySQL service is running</li>
+                        </ul>
+                    </div>
+
+                    <h4>Permission Errors</h4>
+                    <div class="info-box warning">
+                        <p><strong>Problem:</strong> Admin commands not working</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Verify ACE permissions are set correctly</li>
+                            <li>Check player has proper group assignment</li>
+                            <li>Restart server after permission changes</li>
+                            <li>Ensure permissions are in server.cfg</li>
+                        </ul>
+                    </div>
+
+                    <h4>Vehicle Spawning Issues</h4>
+                    <div class="info-box warning">
+                        <p><strong>Problem:</strong> Vehicles not spawning or disappearing</p>
+                        <p><strong>Solutions:</strong></p>
+                        <ul>
+                            <li>Check spawn coordinates in config</li>
+                            <li>Verify vehicle model names are correct</li>
+                            <li>Ensure spawn protection settings are appropriate</li>
+                            <li>Check for conflicting vehicle scripts</li>
+                        </ul>
+                    </div>
+
+                    <h3>Debug Mode</h3>
+                    <p>Enable debug mode in <code>s_config.lua</code> for detailed logging:</p>
+                    <pre><code>SConfig.Debug = true</code></pre>
+                    <p>This will provide detailed console output for troubleshooting.</p>
+
+                    <h3>Log Files</h3>
+                    <p>Check the following for error messages:</p>
+                    <ul>
+                        <li><strong>Server Console</strong> - Main server output</li>
+                        <li><strong>F8 Console</strong> - Client-side errors</li>
+                        <li><strong>Discord Webhook Logs</strong> - Transaction and security events</li>
+                        <li><strong>MySQL Error Logs</strong> - Database-related issues</li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div id="support" class="content-section">
+                    <h2><span class="emoji">📞</span> Support</h2>
+                    
+                    <h3>Getting Help</h3>
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>Discord Support:</strong> <a href="https://discord.gg/tWwfPnxz47">Join our Discord</a></li>
+                            <li><strong>Documentation:</strong> This documentation covers most common scenarios</li>
+                            <li><strong>Issues:</strong> Report bugs and issues through Discord</li>
+                        </ul>
+                    </div>
+
+                    <h3>Before Requesting Support</h3>
+                    <ol>
+                        <li>Check this documentation thoroughly</li>
+                        <li>Enable debug mode and check console output</li>
+                        <li>Verify your configuration matches the examples</li>
+                        <li>Test with minimal configuration first</li>
+                        <li>Check for conflicting resources</li>
+                    </ol>
+
+                    <h3>Support Information</h3>
+                    <p>When requesting support, please provide:</p>
+                    <ul>
+                        <li><strong>Server Console Errors</strong> - Copy and paste error messages</li>
+                        <li><strong>Configuration Files</strong> - Remove sensitive data before sharing</li>
+                        <li><strong>Steps to Reproduce</strong> - Detailed steps to reproduce the issue</li>
+                        <li><strong>Server Information</strong> - FiveM version, resources, and server specs</li>
+                        <li><strong>Database Information</strong> - MySQL version and any relevant logs</li>
+                    </ul>
+
+                    <h3>Community Resources</h3>
+                    <ul>
+                        <li><strong>Discord Community:</strong> <a href="https://discord.gg/tWwfPnxz47">https://discord.gg/tWwfPnxz47</a></li>
+                        <li><strong>Updates & Announcements:</strong> Check Discord for latest updates</li>
+                        <li><strong>Feature Requests:</strong> Submit suggestions through Discord</li>
+                        <li><strong>Bug Reports:</strong> Report issues with detailed information</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
         <div class="footer">
-            <p><strong>TD-Store</strong> - Premium FiveM Store System</p>
+            <p><strong>TD-Store</strong> - Tebex Credit Integration + Vehicle Management</p>
         </div>
     </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update active nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Find and activate the clicked nav item
+            const activeNavItem = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !mobileMenuBtn.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>
