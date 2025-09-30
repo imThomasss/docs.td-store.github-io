@@ -365,6 +365,8 @@
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                width: 100%;
+                max-width: 320px;
             }
             
             .sidebar.open {
@@ -373,20 +375,145 @@
             
             .main-content {
                 margin-left: 0;
+                padding: 0 16px 40px;
+            }
+            
+            .header {
+                padding: 16px 0;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .badges {
+                margin: 12px 0;
+            }
+            
+            .badge {
+                font-size: 10px;
+                padding: 3px 8px;
+                margin: 1px;
+            }
+            
+            .content h1 {
+                font-size: 1.8rem;
+                margin-top: 24px;
+            }
+            
+            .content h2 {
+                font-size: 1.4rem;
+                margin-top: 32px;
+            }
+            
+            .content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .content-section {
+                margin-bottom: 60px;
+                padding-bottom: 30px;
+            }
+            
+            .content pre {
+                padding: 12px;
+                font-size: 12px;
+                overflow-x: auto;
+            }
+            
+            .content code {
+                font-size: 11px;
+                padding: 2px 6px;
             }
             
             .mobile-menu-btn {
                 display: block;
                 position: fixed;
-                top: 20px;
-                left: 20px;
+                top: 16px;
+                left: 16px;
                 z-index: 1001;
-                background: #161b22;
-                border: 1px solid #30363d;
-                color: #c9d1d9;
+                background: #1a1a1a;
+                border: 1px solid #333333;
+                color: #ffffff;
                 padding: 8px 12px;
                 border-radius: 6px;
                 cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            
+            .mobile-menu-btn:hover {
+                background: #2a2a2a;
+            }
+            
+            /* Mobile table optimization */
+            .content table {
+                font-size: 12px;
+                margin: 16px 0;
+            }
+            
+            .content th, .content td {
+                padding: 8px 6px;
+                word-break: break-word;
+            }
+            
+            /* Stack table columns on very small screens */
+            @media (max-width: 480px) {
+                .content table {
+                    display: block;
+                    width: 100%;
+                }
+                
+                .content thead {
+                    display: none;
+                }
+                
+                .content tbody {
+                    display: block;
+                    width: 100%;
+                }
+                
+                .content tr {
+                    display: block;
+                    margin-bottom: 16px;
+                    background: #1a1a1a;
+                    border: 1px solid #333333;
+                    border-radius: 8px;
+                    padding: 12px;
+                }
+                
+                .content td {
+                    display: block;
+                    text-align: left;
+                    border: none;
+                    padding: 4px 0;
+                    position: relative;
+                    padding-left: 50%;
+                }
+                
+                .content td:before {
+                    content: attr(data-label);
+                    position: absolute;
+                    left: 6px;
+                    width: 45%;
+                    padding-right: 10px;
+                    white-space: nowrap;
+                    font-weight: 600;
+                    color: #888888;
+                }
+            }
+            
+            /* Mobile info boxes */
+            .info-box {
+                padding: 12px;
+                margin: 16px 0;
+            }
+            
+            /* Mobile images */
+            .content img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
             }
         }
         
@@ -775,46 +902,46 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>/givestorecredits</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>Give credits to player</td>
-                                <td><code>/givestorecredits [id] [amount]</code></td>
+                                <td data-label="Command"><code>/givestorecredits</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">Give credits to player</td>
+                                <td data-label="Usage"><code>/givestorecredits [id] [amount]</code></td>
                             </tr>
                             <tr>
-                                <td><code>/removestorecredits</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>Remove credits from player</td>
-                                <td><code>/removestorecredits [id] [amount]</code></td>
+                                <td data-label="Command"><code>/removestorecredits</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">Remove credits from player</td>
+                                <td data-label="Usage"><code>/removestorecredits [id] [amount]</code></td>
                             </tr>
                             <tr>
-                                <td><code>/resetstoreplayer</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>Reset player data</td>
-                                <td><code>/resetstoreplayer [id]</code></td>
+                                <td data-label="Command"><code>/resetstoreplayer</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">Reset player data</td>
+                                <td data-label="Usage"><code>/resetstoreplayer [id]</code></td>
                             </tr>
                             <tr>
-                                <td><code>/viewstoreplayer</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>View player information</td>
-                                <td><code>/viewstoreplayer [id]</code></td>
+                                <td data-label="Command"><code>/viewstoreplayer</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">View player information</td>
+                                <td data-label="Usage"><code>/viewstoreplayer [id]</code></td>
                             </tr>
                             <tr>
-                                <td><code>/givestorevehicle</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>Give vehicle to player</td>
-                                <td><code>/givestorevehicle [id] [vehicle_id]</code></td>
+                                <td data-label="Command"><code>/givestorevehicle</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">Give vehicle to player</td>
+                                <td data-label="Usage"><code>/givestorevehicle [id] [vehicle_id]</code></td>
                             </tr>
                             <tr>
-                                <td><code>/removestorevehicle</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>Remove vehicle from player</td>
-                                <td><code>/removestorevehicle [id] [vehicle_id]</code></td>
+                                <td data-label="Command"><code>/removestorevehicle</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">Remove vehicle from player</td>
+                                <td data-label="Usage"><code>/removestorevehicle [id] [vehicle_id]</code></td>
                             </tr>
                             <tr>
-                                <td><code>/refundstorepurchase</code></td>
-                                <td><code>tdstore.admin</code></td>
-                                <td>Refund a purchase</td>
-                                <td><code>/refundstorepurchase [player_id] [purchase_id]</code></td>
+                                <td data-label="Command"><code>/refundstorepurchase</code></td>
+                                <td data-label="Permission"><code>tdstore.admin</code></td>
+                                <td data-label="Description">Refund a purchase</td>
+                                <td data-label="Usage"><code>/refundstorepurchase [player_id] [purchase_id]</code></td>
                             </tr>
                         </tbody>
                     </table>
@@ -829,8 +956,8 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>tdstore.manager</code></td>
-                                <td>Access to store management interface for adding/editing items and credit packages</td>
+                                <td data-label="Permission"><code>tdstore.manager</code></td>
+                                <td data-label="Description">Access to store management interface for adding/editing items and credit packages</td>
                             </tr>
                         </tbody>
                     </table>
@@ -852,29 +979,29 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>td_store_players</code></td>
-                                <td>Player data and credit balances</td>
-                                <td>id, name, steam_id, license, discord_id, fivem_id, credits, last_seen, first_seen</td>
+                                <td data-label="Table"><code>td_store_players</code></td>
+                                <td data-label="Description">Player data and credit balances</td>
+                                <td data-label="Key Fields">id, name, steam_id, license, discord_id, fivem_id, credits, last_seen, first_seen</td>
                             </tr>
                             <tr>
-                                <td><code>td_store_purchases</code></td>
-                                <td>Purchase history and transactions</td>
-                                <td>id, player_id, item_id, credits_spent, transaction_id, basket_ident, checkout_url, timestamp</td>
+                                <td data-label="Table"><code>td_store_purchases</code></td>
+                                <td data-label="Description">Purchase history and transactions</td>
+                                <td data-label="Key Fields">id, player_id, item_id, credits_spent, transaction_id, basket_ident, checkout_url, timestamp</td>
                             </tr>
                             <tr>
-                                <td><code>td_store_ownership</code></td>
-                                <td>Vehicle/item ownership records</td>
-                                <td>player_id, item_id, purchase_id, created_at</td>
+                                <td data-label="Table"><code>td_store_ownership</code></td>
+                                <td data-label="Description">Vehicle/item ownership records</td>
+                                <td data-label="Key Fields">player_id, item_id, purchase_id, created_at</td>
                             </tr>
                             <tr>
-                                <td><code>td_store_items</code></td>
-                                <td>Store items and configurations</td>
-                                <td>id, name, type, model, hash_key, price_credits, description, category, bundle_items, image_url, active</td>
+                                <td data-label="Table"><code>td_store_items</code></td>
+                                <td data-label="Description">Store items and configurations</td>
+                                <td data-label="Key Fields">id, name, type, model, hash_key, price_credits, description, category, bundle_items, image_url, active</td>
                             </tr>
                             <tr>
-                                <td><code>td_store_credit_packages</code></td>
-                                <td>Tebex credit package management</td>
-                                <td>id, tebex_package_id, name, description, price, currency, credits, tebex_url, image_url, enabled, popular</td>
+                                <td data-label="Table"><code>td_store_credit_packages</code></td>
+                                <td data-label="Description">Tebex credit package management</td>
+                                <td data-label="Key Fields">id, tebex_package_id, name, description, price, currency, credits, tebex_url, image_url, enabled, popular</td>
                             </tr>
                         </tbody>
                     </table>
