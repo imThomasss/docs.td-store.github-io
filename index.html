@@ -13,10 +13,11 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #c9d1d9;
-            background-color: #0d1117;
+            line-height: 1.7;
+            color: #e6edf3;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
             min-height: 100vh;
+            font-size: 16px;
         }
         
         .container {
@@ -26,10 +27,14 @@
         }
         
         .header {
-            background: #161b22;
+            background: rgba(22, 27, 34, 0.8);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid #30363d;
-            padding: 24px 0;
-            margin-bottom: 32px;
+            padding: 32px 0;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .header-content {
@@ -250,10 +255,12 @@
             top: 0;
             width: 280px;
             height: 100vh;
-            background: #161b22;
+            background: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(10px);
             border-right: 1px solid #30363d;
             overflow-y: auto;
             z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
         }
         
         .sidebar-header {
@@ -319,11 +326,22 @@
         }
         
         .content-section {
-            display: none;
+            display: block;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .content-section:last-child {
+            border-bottom: none;
         }
         
         .content-section.active {
-            display: block;
+            background: rgba(88, 166, 255, 0.05);
+            border-radius: 8px;
+            padding: 24px;
+            margin: -24px -24px 60px -24px;
+            border: 1px solid rgba(88, 166, 255, 0.2);
         }
         
         /* Mobile responsiveness */
@@ -561,11 +579,24 @@ add_ace group.manager tdstore.manager allow</code></pre>
     validateOwnershipOnEnter = true,
     allowPassengers = true,
     ejectUnauthorizedDrivers = true,
-    maxVehiclesPerPlayer = 10,
-    cooldownBetweenSpawns = 3,
-    enableAntiCheat = true,
+    deleteVehicleOnUnauthorizedAccess = false,
+    kickPlayerOnRepeatedViolations = false,
+    maxUnauthorizedAccessAttempts = 5,
     logAllTransactions = true,
-    maxPurchasePerMinute = 10
+    maxPurchasePerMinute = 10,
+    requireAdminForRefunds = true,
+    enableAntiCheat = true,
+    maxVehiclesPerPlayer = 10,
+    cooldownBetweenSpawns = 3
+}</code></pre>
+
+                    <h4>Vehicle Spawn Settings</h4>
+                    <pre><code>SConfig.VehicleSpawn = {
+    despawnOnDisconnect = true,
+    despawnOnServerRestart = true,
+    maxSpawnDistance = 50.0,
+    spawnProtectionTime = 5,
+    enableSpawnProtection = true
 }</code></pre>
 
                     <h4>Discord Webhook</h4>
@@ -573,9 +604,21 @@ add_ace group.manager tdstore.manager allow</code></pre>
     enabled = true,
     webhookUrl = "YOUR_DISCORD_WEBHOOK_URL",
     serverName = "Your Server Name",
+    botName = "TD Store Bot",
+    botAvatar = "YOUR_BOT_AVATAR_URL",
     logPurchases = true,
     logCreditPurchases = true,
-    logUnauthorizedAccess = true
+    logUnauthorizedAccess = true,
+    logKicks = true,
+    logAdminActions = true,
+    colors = {
+        purchase = 65280,
+        creditPurchase = 3447003,
+        unauthorizedAccess = 16711680,
+        kick = 16753920,
+        adminAction = 10181046,
+        error = 10038562
+    }
 }</code></pre>
 
                     <h3>Client Configuration (c_config.lua)</h3>
@@ -586,12 +629,27 @@ add_ace group.manager tdstore.manager allow</code></pre>
 CConfig.Keybind = 'F7'           -- Keybind to open store
 CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
 
+                    <h4>Vehicle Spawn Settings</h4>
+                    <pre><code>CConfig.VehicleSpawn = {
+    spawnDistance = 10.0,
+    maxSpawnedVehicles = 3,
+    despawnOnDisconnect = true,
+    spawnHeight = 1.0
+}</code></pre>
+
                     <h4>Vehicle Preview Settings</h4>
                     <pre><code>CConfig.VehiclePreview = {
     dealershipCoords = vector3(-56.79, -1096.63, 25.42),
     vehicleSpawnCoords = vector3(-50.0, -1100.0, 25.5),
     cameraCoords = vector3(-45.0, -1095.0, 27.0),
     cameraRotation = vector3(-10.0, 0.0, 45.0)
+}</code></pre>
+
+                    <h4>UI Settings</h4>
+                    <pre><code>CConfig.UI = {
+    theme = "dark",
+    currencySymbol = "$",
+    creditSymbol = "C"
 }</code></pre>
                 </div>
 
@@ -844,23 +902,28 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                         <tbody>
                             <tr>
                                 <td><code>td_store_players</code></td>
-                                <td>Player credit balances and data</td>
-                                <td>player_id, credits, last_login</td>
+                                <td>Player data and credit balances</td>
+                                <td>id, name, steam_id, license, discord_id, fivem_id, credits, last_seen, first_seen</td>
                             </tr>
                             <tr>
                                 <td><code>td_store_purchases</code></td>
                                 <td>Purchase history and transactions</td>
-                                <td>purchase_id, player_id, item_id, amount, timestamp</td>
+                                <td>id, player_id, item_id, credits_spent, transaction_id, basket_ident, checkout_url, timestamp</td>
                             </tr>
                             <tr>
                                 <td><code>td_store_ownership</code></td>
-                                <td>Vehicle ownership records</td>
-                                <td>player_id, vehicle_model, purchase_date</td>
+                                <td>Vehicle/item ownership records</td>
+                                <td>player_id, item_id, purchase_id, created_at</td>
                             </tr>
                             <tr>
                                 <td><code>td_store_items</code></td>
                                 <td>Store items and configurations</td>
-                                <td>item_id, name, price, category, enabled</td>
+                                <td>id, name, type, model, hash_key, price_credits, description, category, bundle_items, image_url, active</td>
+                            </tr>
+                            <tr>
+                                <td><code>td_store_credit_packages</code></td>
+                                <td>Tebex credit package management</td>
+                                <td>id, tebex_package_id, name, description, price, currency, credits, tebex_url, image_url, enabled, popular</td>
                             </tr>
                         </tbody>
                     </table>
@@ -992,16 +1055,23 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
 
     <script>
         function showSection(sectionId) {
-            // Hide all sections
+            // Remove active class from all sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Show selected section
+            // Add active class to selected section
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
+                
+                // Smooth scroll to the section
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start',
+                    inline: 'nearest'
+                });
             }
             
             // Update active nav item
@@ -1028,6 +1098,49 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
             sidebar.classList.toggle('open');
         }
         
+        // Update active nav item based on scroll position
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('.content-section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let currentSection = '';
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    currentSection = section.id;
+                }
+            });
+            
+            // Update nav items
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(currentSection)) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Update section highlighting
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === currentSection) {
+                    section.classList.add('active');
+                }
+            });
+        }
+        
+        // Throttled scroll handler
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(updateActiveNav, 10);
+        });
+        
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
@@ -1046,6 +1159,11 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
             if (window.innerWidth > 768) {
                 sidebar.classList.remove('open');
             }
+        });
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActiveNav();
         });
     </script>
 </body>
