@@ -638,14 +638,65 @@
                         </ul>
                     </div>
 
-                    <h3>Step 1: Download and Extract</h3>
+                    <h3>Step 1: Create Tebex Credit Packages</h3>
+                    <div class="info-box warning">
+                        <p><strong>Important:</strong> Complete this step BEFORE installing the resource. Your credit packages must be created in Tebex first.</p>
+                    </div>
+                    
+                    <ol>
+                        <li><strong>Login to your Tebex Dashboard</strong>
+                            <ul>
+                                <li>Go to <a href="https://creator.tebex.io" target="_blank">creator.tebex.io</a></li>
+                                <li>Navigate to your store</li>
+                            </ul>
+                        </li>
+                        
+                        <li><strong>Create Credit Packages</strong>
+                            <ul>
+                                <li>Go to <strong>Packages</strong> → <strong>Create Package</strong></li>
+                                <li>Set package type to <strong>Single</strong></li>
+                                <li>Name your package (e.g., "100 Credits", "500 Credits", "1000 Credits")</li>
+                                <li>Set the price in your preferred currency</li>
+                                <li>Add a description for players</li>
+                            </ul>
+                        </li>
+                        
+                        <li><strong>Configure Package Deliverables</strong>
+                            <div class="info-box">
+                                <p><strong>Important:</strong> The deliverable type doesn't matter for TD-Store. Credits are handled automatically by our webhook system.</p>
+                                <p>You can set any deliverable action such as:</p>
+                                <ul>
+                                    <li>"Assign a Discord role" (recommended - easiest option)</li>
+                                    <li>"Execute a command"</li>
+                                    <li>"Send a message"</li>
+                                </ul>
+                                <p>The actual credit amount will be configured in the TD-Store Manager interface after installation.</p>
+                            </div>
+                        </li>
+                        
+                        <li><strong>Save and Enable Package</strong>
+                            <ul>
+                                <li>Make sure the package is enabled</li>
+                                <li>Note the package ID (you'll need this later)</li>
+                            </ul>
+                        </li>
+                        
+                        <li><strong>Repeat for Multiple Credit Tiers</strong>
+                            <ul>
+                                <li>Create packages for different credit amounts (e.g., 100, 500, 1000, 2500 credits)</li>
+                                <li>Set appropriate pricing for each tier</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Step 2: Download and Extract</h3>
                     <ol>
                         <li>Download TD-Store from your cfx assets</li>
                         <li>Extract the archive to your server's <code>resources</code> folder</li>
                         <li>Ensure the folder structure is: <code>resources/td-store/</code></li>
                     </ol>
 
-                    <h3>Step 2: Database Setup</h3>
+                    <h3>Step 3: Database Setup</h3>
                     <ol>
                         <li>Open your MySQL database management tool (phpMyAdmin, MySQL Workbench, etc.)</li>
                         <li>Import the <code>database.sql</code> file into your database</li>
@@ -659,7 +710,7 @@
                         </li>
                     </ol>
 
-                    <h3>Step 3: Resource Configuration</h3>
+                    <h3>Step 4: Resource Configuration</h3>
                     <p>Add TD-Store to your <code>server.cfg</code> file:</p>
                     <pre><code># Database (must load first)
 ensure oxmysql
@@ -667,7 +718,7 @@ ensure oxmysql
 # TD-Store (loads after oxmysql)
 ensure td-store</code></pre>
 
-                    <h3>Step 4: Permissions Setup</h3>
+                    <h3>Step 5: Permissions Setup</h3>
                     <p>Add these ACE permissions to your <code>server.cfg</code>:</p>
                     <pre><code># Admin permissions
 add_ace group.admin tdstore.admin allow
