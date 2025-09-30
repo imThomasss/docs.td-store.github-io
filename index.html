@@ -12,12 +12,13 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-            line-height: 1.7;
-            color: #e6edf3;
-            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #0a0a0a;
             min-height: 100vh;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 400;
         }
         
         .container {
@@ -27,14 +28,12 @@
         }
         
         .header {
-            background: rgba(22, 27, 34, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #30363d;
-            padding: 32px 0;
-            margin-bottom: 40px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-bottom: 1px solid #333333;
+            padding: 20px 0;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 10;
         }
         
         .header-content {
@@ -45,11 +44,12 @@
         }
         
         .header h1 {
-            color: #f0f6fc;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 16px;
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
             border: none;
+            letter-spacing: -0.5px;
         }
         
         .badges {
@@ -58,33 +58,39 @@
         
         .badge {
             display: inline-block;
-            padding: 6px 12px;
+            padding: 6px 14px;
             margin: 4px;
-            background: #21262d;
-            color: #c9d1d9;
+            background: #1a1a1a;
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
-            border: 1px solid #30363d;
+            border: 1px solid #333333;
+            transition: all 0.2s ease;
+        }
+        
+        .badge:hover {
+            background: #2a2a2a;
+            border-color: #444444;
         }
         
         .badge.blue { 
-            background: #0969da; 
+            background: linear-gradient(135deg, #0066ff 0%, #0044cc 100%); 
             color: #ffffff;
-            border-color: #0969da;
+            border-color: #0066ff;
         }
         
         .badge.green { 
-            background: #1a7f37; 
+            background: linear-gradient(135deg, #00cc66 0%, #009944 100%); 
             color: #ffffff;
-            border-color: #1a7f37;
+            border-color: #00cc66;
         }
         
         .badge.gold { 
-            background: #9a6700; 
-            color: #ffffff;
-            border-color: #9a6700;
+            background: linear-gradient(135deg, #ffaa00 0%, #cc8800 100%); 
+            color: #000000;
+            border-color: #ffaa00;
         }
         
         .main-content {
@@ -97,60 +103,64 @@
         }
         
         .content h1, .content h2, .content h3 {
-            color: #f0f6fc;
-            margin-top: 32px;
-            margin-bottom: 16px;
+            color: #ffffff;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
         
         .content h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 8px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 12px;
         }
         
         .content h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            border-bottom: 1px solid #30363d;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #333333;
             padding-bottom: 8px;
         }
         
         .content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #c9d1d9;
+            font-size: 1.3rem;
+            color: #cccccc;
         }
         
         .content p {
             margin-bottom: 16px;
-            color: #c9d1d9;
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.7;
         }
         
         .content code {
-            background: #161b22;
-            color: #f0f6fc;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            font-size: 85%;
-            border: 1px solid #30363d;
+            background: #1a1a1a;
+            color: #00ff88;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 13px;
+            border: 1px solid #333333;
+            font-weight: 500;
         }
         
         .content pre {
-            background: #161b22;
-            color: #c9d1d9;
-            padding: 16px;
-            border-radius: 6px;
+            background: #1a1a1a;
+            color: #cccccc;
+            padding: 20px;
+            border-radius: 12px;
             overflow-x: auto;
-            border: 1px solid #30363d;
-            margin: 16px 0;
+            border: 1px solid #333333;
+            margin: 20px 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
         
         .content pre code {
             background: transparent;
             border: none;
             padding: 0;
+            color: #cccccc;
         }
         
         .content table {
@@ -255,24 +265,24 @@
             top: 0;
             width: 280px;
             height: 100vh;
-            background: rgba(22, 27, 34, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid #30363d;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-right: 1px solid #333333;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
         }
         
         .sidebar-header {
             padding: 24px 20px;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid #333333;
         }
         
         .sidebar-header h2 {
-            color: #f0f6fc;
+            color: #ffffff;
             font-size: 1.25rem;
-            font-weight: 600;
+            font-weight: 700;
             margin: 0;
+            letter-spacing: -0.3px;
         }
         
         .sidebar-nav {
@@ -284,34 +294,48 @@
         }
         
         .nav-section-title {
-            color: #8b949e;
-            font-size: 12px;
+            color: #888888;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 8px 20px;
+            letter-spacing: 1px;
+            padding: 12px 20px 8px;
             margin: 0;
         }
         
         .nav-item {
             display: block;
-            color: #c9d1d9;
+            color: #cccccc;
             text-decoration: none;
-            padding: 8px 20px;
+            padding: 10px 20px;
             font-size: 14px;
+            font-weight: 500;
             transition: all 0.2s ease;
             border-left: 3px solid transparent;
+            position: relative;
         }
         
         .nav-item:hover {
-            background: #21262d;
-            color: #f0f6fc;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            transform: translateX(2px);
         }
         
         .nav-item.active {
-            background: #21262d;
-            color: #f0f6fc;
-            border-left-color: #58a6ff;
+            background: rgba(0, 102, 255, 0.1);
+            color: #0066ff;
+            border-left-color: #0066ff;
+            font-weight: 600;
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #0066ff 0%, #0044cc 100%);
         }
         
         .nav-item .emoji {
@@ -327,9 +351,9 @@
         
         .content-section {
             display: block;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             padding-bottom: 40px;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid #222222;
         }
         
         .content-section:last-child {
@@ -337,11 +361,12 @@
         }
         
         .content-section.active {
-            background: rgba(88, 166, 255, 0.05);
-            border-radius: 8px;
-            padding: 24px;
-            margin: -24px -24px 60px -24px;
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            background: rgba(0, 102, 255, 0.03);
+            border-radius: 12px;
+            padding: 32px;
+            margin: -32px -32px 80px -32px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 102, 255, 0.1);
         }
         
         /* Mobile responsiveness */
@@ -1054,7 +1079,13 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
     </div>
 
     <script>
+        let isScrolling = false;
+        let scrollTimeout;
+        
         function showSection(sectionId) {
+            // Prevent flashing during scroll
+            isScrolling = true;
+            
             // Remove active class from all sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => {
@@ -1091,6 +1122,11 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
             if (sidebar.classList.contains('open')) {
                 sidebar.classList.remove('open');
             }
+            
+            // Reset scrolling flag after animation
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
         }
         
         function toggleSidebar() {
@@ -1100,11 +1136,13 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
         
         // Update active nav item based on scroll position
         function updateActiveNav() {
+            if (isScrolling) return; // Don't update during programmatic scrolling
+            
             const sections = document.querySelectorAll('.content-section');
             const navItems = document.querySelectorAll('.nav-item');
             
             let currentSection = '';
-            const scrollPos = window.scrollY + 100;
+            const scrollPos = window.scrollY + 200; // Increased offset for better detection
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -1115,30 +1153,32 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
                 }
             });
             
-            // Update nav items
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('onclick').includes(currentSection)) {
-                    item.classList.add('active');
-                }
-            });
-            
-            // Update section highlighting
-            sections.forEach(section => {
-                section.classList.remove('active');
-                if (section.id === currentSection) {
-                    section.classList.add('active');
-                }
-            });
+            // Only update if we found a valid section
+            if (currentSection) {
+                // Update nav items
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('onclick').includes(currentSection)) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Update section highlighting
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === currentSection) {
+                        section.classList.add('active');
+                    }
+                });
+            }
         }
         
         // Throttled scroll handler
-        let scrollTimeout;
         window.addEventListener('scroll', function() {
             if (scrollTimeout) {
                 clearTimeout(scrollTimeout);
             }
-            scrollTimeout = setTimeout(updateActiveNav, 10);
+            scrollTimeout = setTimeout(updateActiveNav, 50); // Increased delay
         });
         
         // Close sidebar when clicking outside on mobile
@@ -1163,7 +1203,20 @@ CConfig.EnableKeybind = true     -- Enable/disable keybind</code></pre>
         
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            updateActiveNav();
+            // Set initial active section
+            const firstSection = document.querySelector('.content-section');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+            
+            // Set initial active nav item
+            const firstNavItem = document.querySelector('.nav-item');
+            if (firstNavItem) {
+                firstNavItem.classList.add('active');
+            }
+            
+            // Update after a short delay to ensure proper positioning
+            setTimeout(updateActiveNav, 100);
         });
     </script>
 </body>
